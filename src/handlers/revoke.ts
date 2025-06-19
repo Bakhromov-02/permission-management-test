@@ -1,9 +1,10 @@
 import { revokePermission, getPermissions } from '../db/permissions';
-import { PermissionPayload, ErrorResponse, ErrorCode } from '../types';
 import { kv, encode } from '../kv/cache';
-import { logger } from '../utils/logger';
 
-export async function handleRevoke(payload: PermissionPayload): Promise<{ status: 'ok' } | ErrorResponse> {
+import { logger } from '../lib/helpers';
+import { ErrorCode, ErrorResponse, RevokeRequest, RevokeResponse } from '../lib/permissions';
+
+export async function handleRevoke(payload: RevokeRequest): Promise< RevokeResponse | ErrorResponse> {
   try {
    logger.info("revoke_request", payload);
 

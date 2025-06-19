@@ -1,9 +1,12 @@
-import { grantPermission, getPermissions } from '../db/permissions';
-import { PermissionPayload } from '../types';
 import { encode, kv } from '../kv/cache';
-import { logger } from '../utils/logger';
+import { grantPermission, getPermissions } from '../db/permissions';
 
-export async function handleGrant(payload: PermissionPayload) {
+import { logger } from '../lib/helpers';
+import { GrantRequest, GrantResponse } from "../lib/permissions";
+
+export async function handleGrant(
+  payload: GrantRequest
+): Promise<GrantResponse> {
   const { apiKey, module, action } = payload;
 
   logger.info("grant_request", payload);

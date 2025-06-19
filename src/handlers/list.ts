@@ -1,9 +1,10 @@
 import { getPermissions } from '../db/permissions';
-import { ListPayload, Permission, ErrorResponse, ErrorCode } from '../types';
 import { kv, decode, encode } from '../kv/cache';
-import { logger } from '../utils/logger';
 
-export async function handleList(payload: ListPayload): Promise<{ permissions: Permission[] } | ErrorResponse> {
+import { logger } from '../lib/helpers';
+import { ErrorCode, ErrorResponse, ListRequest, ListResponse } from '../lib/permissions';
+
+export async function handleList(payload: ListRequest): Promise<ListResponse | ErrorResponse> {
   try {
     logger.info('list_request', payload);
 

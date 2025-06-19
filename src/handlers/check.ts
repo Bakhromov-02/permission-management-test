@@ -1,11 +1,12 @@
 import { getPermission } from "../db/permissions";
-import { CheckPayload, ErrorResponse, ErrorCode } from "../types";
 import { kv, decode, encode } from "../kv/cache";
-import { logger } from "../utils/logger";
+
+import { logger } from "../lib/helpers";
+import { CheckRequest, CheckResponse, ErrorCode, ErrorResponse } from "../lib/permissions";
 
 export async function handleCheck(
-  payload: CheckPayload
-): Promise<{ allowed: boolean } | ErrorResponse> {
+  payload: CheckRequest
+): Promise<CheckResponse | ErrorResponse> {
   try {
     logger.info("check_request", payload);
 
